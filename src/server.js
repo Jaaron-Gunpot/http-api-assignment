@@ -15,10 +15,17 @@ const urlStruct = {
   // 'notFound':
 };
 const onRequest = (request, response) => {
-  console.log(request.url);
+  // make the url object to do stuff with
+  const parsedUrl = new URL(request.url);
+  console.log(parsedUrl.pathname);
+
+  // grab the accept headers
+  const acceptedTypes = request.headers.accept.split(',');
   // if the url is defined in the urlStruct object,it goes there. If not, it goes to the index page
-  if (urlStruct[request.url]) {
-    urlStruct[request.url](request, response);
+  if (urlStruct[parsedUrl.pathname]) {
+    // only functions with three arguments care about the third one
+    // the functions that only take request and response don't care about the third
+    urlStruct[parsedUrl.pathname](request, response, acceptedTypes);
   } else {
     urlStruct['/'](request, response);
   }

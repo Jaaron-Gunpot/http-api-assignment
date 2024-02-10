@@ -5,7 +5,27 @@
   <link rel="stylesheet" type="text/css" href="/style.css">
   
   <script>
+    const sendRequest = (page,type) =>{
+      const options = {
+        'method':'GET',
+        'headers':{
+          'Accept':type
+        }
+      }
+      fetch(page,options).then((response)=>{
+        console.log(response);
+      });
+    };
 
+    const init = () =>{
+      const pageSelect = document.getElementById('page');
+      const typeSelect = document.getElementById('type');
+
+      document.querySelector('button').onclick((e)=>{
+        sendRequest(pageSelect.value,typeSelect.value)
+      });
+    };
+    window.onload = init;
   </script>
 </head>
 <body>
