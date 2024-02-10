@@ -14,7 +14,7 @@ const urlStruct = {
   // '/forbidden':,
   // '/internal':,
   // '/notimplemented':,
-  // 'notFound':
+  notFound: responseHandler.notFound,
 };
 const onRequest = (request, response) => {
   // make the url object to do stuff with
@@ -29,7 +29,7 @@ const onRequest = (request, response) => {
     // the functions that only take request and response don't care about the third
     urlStruct[parsedUrl.pathname](request, response, acceptedTypes, queryParams);
   } else {
-    urlStruct['/'](request, response);
+    urlStruct.notFound(request, response);
   }
 };
 

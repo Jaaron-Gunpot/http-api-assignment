@@ -63,8 +63,9 @@ const unauthorized = (request, response, acceptedTypes, params) => {
         message: 'You have access to the content',
     };
 
-    //if loggedIn does not exist or is not true, send 401
-    if (!loggedIn || loggedIn !== 'true') {
+    //if loggedIn does not exist or is not true
+    //since loggedIn is a string it can be used as a falsy value and not need to be a boolean
+    if (!loggedIn || loggedIn !== 'yes') {
         //send failure xml if they want it
         if(acceptedTypes[0] === 'text/xml'){
             const responseXML = '<response><message>You are not logged in</message><id>unauthorized</id></response>';
@@ -88,7 +89,19 @@ const unauthorized = (request, response, acceptedTypes, params) => {
     return respond(request, response, 200, acceptableJson, 'application/json');
 };
 
+const notFound = (request, response) => {
+    const responseJSON = {
+        message: 'The page you are looking for was not found',
+        id: 'notFound',
+    };
+
+    const acceptableJson = JSON.stringify(responseJSON);
+    return respond(request, response, 404, acceptableJson, 'application/json');
+};
+
 module.exports = {
     success,
     badRequest,
+    unauthorized,
+    notFound,
 };
