@@ -1,5 +1,6 @@
 const http = require('http');
 const query = require('querystring');
+const url = require('url');
 const htmlHandler = require('./htmlHandler.js');
 
 const port = process.env.PORT || process.env.NODE_PORT || 3000;
@@ -16,7 +17,7 @@ const urlStruct = {
 };
 const onRequest = (request, response) => {
   // make the url object to do stuff with
-  const parsedUrl = new URL(request.url);
+  const parsedUrl = url.parse(request.url);
   console.log(parsedUrl.pathname);
 
   // grab the accept headers

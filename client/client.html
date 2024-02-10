@@ -21,8 +21,12 @@
       const pageSelect = document.getElementById('page');
       const typeSelect = document.getElementById('type');
 
-      document.querySelector('button').onclick((e)=>{
-        sendRequest(pageSelect.value,typeSelect.value)
+      document.querySelector('button').addEventListener('click',()=>{
+        //gets the current value out of the selected option
+        const page = pageSelect.value;
+        const type = typeSelect.value;
+        console.log(page,type);
+        sendRequest(page,type);
       });
     };
     window.onload = init;
