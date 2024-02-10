@@ -11,9 +11,9 @@ const urlStruct = {
   '/success': responseHandler.success,
   '/badRequest': responseHandler.badRequest,
   '/unauthorized': responseHandler.unauthorized,
-  '/forbidden':responseHandler.forbidden,
-  '/internal':responseHandler.internal,
-  '/notimplemented':responseHandler.notimplemented,
+  '/forbidden': responseHandler.forbidden,
+  '/internal': responseHandler.internal,
+  '/notImplemented': responseHandler.notImplemented,
   notFound: responseHandler.notFound,
 };
 const onRequest = (request, response) => {
