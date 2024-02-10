@@ -2,14 +2,15 @@ const http = require('http');
 const query = require('querystring');
 const url = require('url');
 const htmlHandler = require('./htmlHandler.js');
+const responseHandler = require('./response.js');
 
 const port = process.env.PORT || process.env.NODE_PORT || 3000;
 const urlStruct = {
   '/': htmlHandler.getIndex,
   '/style.css': htmlHandler.getCSS,
-  // '/success':,
-  // '/badRequest':,
-  // '/unauthorized':,
+  '/success': responseHandler.success,
+  '/badRequest': responseHandler.badRequest,
+  '/unauthorized': responseHandler.unauthorized,
   // '/forbidden':,
   // '/internal':,
   // '/notimplemented':,
@@ -18,15 +19,15 @@ const urlStruct = {
 const onRequest = (request, response) => {
   // make the url object to do stuff with
   const parsedUrl = url.parse(request.url);
-  console.log(parsedUrl.pathname);
 
   // grab the accept headers
   const acceptedTypes = request.headers.accept.split(',');
+  const queryParams = query.parse(parsedUrl.query);
   // if the url is defined in the urlStruct object,it goes there. If not, it goes to the index page
   if (urlStruct[parsedUrl.pathname]) {
     // only functions with three arguments care about the third one
     // the functions that only take request and response don't care about the third
-    urlStruct[parsedUrl.pathname](request, response, acceptedTypes);
+    urlStruct[parsedUrl.pathname](request, response, acceptedTypes, queryParams);
   } else {
     urlStruct['/'](request, response);
   }

@@ -13,7 +13,12 @@
         }
       }
       fetch(page,options).then((response)=>{
-        console.log(response);
+        response.text().then((returnedText)=>{
+          console.log(`${page} asked for ${type} and got ${response.status} and ${returnedText}`);
+          if(type === 'application/json'){
+            const content = JSON.parse(returnedText);
+            document.getElementById('content').innerHTML = `${content.message}`;
+        }});
       });
     };
 
