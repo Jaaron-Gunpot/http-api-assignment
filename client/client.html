@@ -18,13 +18,13 @@
         response.text().then((returnedText) => {
           console.log(`${page} asked for ${type} and got ${response.status} and ${returnedText}`);
           if (type === 'application/json') {
-            const content = JSON.parse(returnedText);
+            const serverContent = JSON.parse(returnedText);
             console.log(content);
             //if it has an id, show it to the user
             if(content.id){
-              content.innerHTML = `<b>${content.id}</b><p>${content.message}</p>`;
+              content.innerHTML = `<b>${serverContent.id}</b><p>${serverContent.message}</p>`;
             }else{
-              content.innerHTML = `<p>${content.message}</p>`;
+              content.innerHTML = `<p>${serverContent.message}</p>`;
             }
           }
           if (type === 'text/xml'){

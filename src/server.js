@@ -19,6 +19,7 @@ const urlStruct = {
 const onRequest = (request, response) => {
   // make the url object to do stuff with
   const parsedUrl = url.parse(request.url);
+  console.log(request.url);
 
   // grab the accept headers
   const acceptedTypes = request.headers.accept.split(',');
